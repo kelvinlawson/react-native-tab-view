@@ -77,6 +77,8 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
       typeof route.accessible !== 'undefined' ? route.accessible : true,
     getAccessibilityLabel: ({ route }: Scene<T>) => route.accessibilityLabel,
     getTestID: ({ route }: Scene<T>) => route.testID,
+    activeTabColor: null,
+    inactiveTabColor: null
   };
 
   constructor(props: Props<T>) {
@@ -462,6 +464,8 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
 
               const isFocused = i === navigationState.index;
 
+              const backgroundColor = isFocused ? this.props.activeTabColor : this.props.inactiveTabColor;
+
               return (
                 <TouchableItem
                   borderless
@@ -485,6 +489,7 @@ export default class TabBar<T: *> extends React.Component<Props<T>, State> {
                         styles.tabItem,
                         tabStyle,
                         passedTabStyle,
+                        {backgroundColor: backgroundColor},
                         styles.container,
                       ]}
                     >
